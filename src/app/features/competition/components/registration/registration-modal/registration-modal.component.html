@@ -1,0 +1,113 @@
+<!-- <p>registration-fee-modal works!</p>
+<p *ngFor="let registrationFee of registrationFees; let i=index ">
+    {{ registrationFee | objectInfo}}
+</p>
+<div>
+    <h2>choosen one for edit:</h2>
+    <p>{{ registrationFee | objectInfo}}</p>
+</div> -->
+
+<div class="modal-header" #dialogContent>
+  <h4 class="modal-title" id="modal-title">{{isNew ? "Insert" : "Update"}}</h4>
+  <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  
+  
+<form class="" *ngIf="registrationForm" [formGroup]="registrationForm" (ngSubmit)="onSubmit()" >
+
+  <div class="" >
+    <div class="">
+      <h3>{{ (formTitleKey) | translate}}</h3>
+
+      <div class="col-sm-6 my-1">
+        <label for="climberName">{{'REGISTRATION.CLIMBER' | translate }}</label>
+        <div class="input-group">
+          <input id="climber" readonly class="form-control" type="hidden" formControlName="climber"/>
+          <input id="climberName" readonly class="form-control" placeholder="{{'REGISTRATION.CLIMBER' | translate }}"  type="text" formControlName="climberName"/>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="openChooseClimberModal()" type="button">{{'REGISTRATION.CHOOSE_CLIMBER' | translate }}</button>
+          </div>
+        </div>     
+      </div>
+
+      <div class="from-group">
+        <label for="startNumber">{{'REGISTRATION.START_NUMBER' | translate }}</label>
+        <input id="startNumber" class="form-control" placeholder="{{'REGISTRATION.START_NUMBER' | translate }}"  type="text" formControlName="startNumber"/>
+        
+       <!--<div class="alert alert-danger" *ngIf="reagistrationForm.get('startNumber').touched && reagistrationForm.get('startNumber').errors">
+          <span *ngIf="hasErrors('startNumber','numeric')" >
+            <small>{{'VALIDATION_MESSAGES.MUST_BE_NUMBER'   | translate }}</small>
+          </span>
+          <span *ngIf="hasErrors('startNumber','required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>--> 
+      </div>
+
+      <div class="from-group">
+        <label for="name">{{'REGISTRATION.PAID' | translate }}</label>
+        <input id="name" class="form-control" placeholder="{{'REGISTRATION.PAID' | translate }}"  type="checkbox" formControlName="paid"/>
+      </div>
+
+
+      <div class="from-group">
+        <label for="name">{{'REGISTRATION.FEE' | translate }}</label>
+        <select formControlName="fee">
+          <option *ngFor="let x of fees"  [value]="x.ord">{{x.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="password-input">{{'REGISTRATION.CREATED_DATE' | translate }}</label>
+        <div class="input-group">
+          <input id="createdDateField" ngbDatepicker  #createdDateField="ngbDatepicker" class="form-control" placeholder="{{'REGISTRATION.CREATED_DATE' | translate }}"  type="text" formControlName="createdDateField"/>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="createdDateField.toggle()" type="button">Choose date</button>
+          </div>
+  
+        </div>
+        <div class="alert alert-danger" *ngIf="registrationForm.get('createdDateField').touched && registrationForm.get('createdDateField').errors">
+          <span *ngIf="hasErrors('createdDateField','required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password-input">{{'REGISTRATION.PAID_DATE' | translate }}</label>
+        <div class="input-group">
+          <input id="paidDateField" ngbDatepicker  #paidDateField="ngbDatepicker" class="form-control" placeholder="{{'REGISTRATION.PAID_DATE' | translate }}"  type="text" formControlName="paidDateField"/>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="paidDateField.toggle()" type="button">Choose date</button>
+          </div>
+  
+        </div>
+        <div class="alert alert-danger" *ngIf="registrationForm.get('paidDateField').touched && registrationForm.get('paidDateField').errors">
+          <span *ngIf="hasErrors('paidDateField','required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+     
+
+      <div class="d-flex flex-row-reverse mt-2">
+        <!-- <button type="button" class="btn btn-outline-danger" (click)="onDeleteClick(registrationFee)" [disabled]="!isEnabled('buttonDelete')"><bi name="card-text"></bi>Delete</button> -->
+        <!-- <button type="button" class="btn btn-outline-success" (click)="updateAction()" [disabled]="!isEnabled('buttonEdit')"><bi name="card-text"></bi>Edit</button> -->
+        <!-- <button type="button" class="btn btn-outline-success" (click)="cancelAction()" ><bi name="card-text"></bi>Cancel</button> -->
+        <!-- <button type="button" class="btn btn-outline-success" (click)="enableChanges()" [disabled]="!isEnabled('buttonEnableChanges')" ><bi name="card-text"></bi>EnableChanges</button> -->
+        <!-- <button type="button" class="btn btn-outline-success" (click)="insertAction()"  [disabled]="!isEnabled('buttonSave')"  ><bi name="card-text"></bi>Save</button> -->
+      </div>
+    </div>
+  </div>
+
+
+</form>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" ngbAutofocus (click)="onCancel()">Cancel</button>
+  <button type="button" class="btn btn-danger" (click)="onConfirm()">Ok</button>
+</div>

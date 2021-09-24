@@ -1,0 +1,29 @@
+<h3>Climbing routes</h3>
+<button class="btn btn-outline-primary btn-sm m-2 float-right" type="button" (click)="openInsertNewModal()" ><bi name="plus"></bi>{{'BUTTONS.ADD' | translate}}</button>
+<table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th  scope="col" >{{'ROUTE.NAME' | translate }}</th>
+      <th  scope="col" >{{'ROUTE.GRADE' | translate }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let route of routes; let i=index ">
+      <td>
+        {{ route.ord }}
+      </td>
+      <td>{{ route.name }}</td>
+      <td>{{ route.grade }}</td>
+      <td>
+        <!-- Obratite paznju na to da nema kose crte ispred city-form za to
+          sto je ovo vec child ruta city i ako bi se stavil kosa crta izasao bi iz city rute -->
+        <!-- <button class="btn btn-outline-success" [routerLink]="['../competition-form', competition.id, 'FORM_VIEW']"  ><bi name="card-text"></bi>{{'BUTTONS.DETAILS' | translate}}</button> -->
+        <!-- <button class="btn btn-outline-success" [routerLink]="['../competition-form/', competition.id, 'FORM_EDIT']" ><bi name="pencil"></bi>{{'BUTTONS.EDIT' | translate}}</button> -->
+        <button type="button" class="btn btn-outline-danger"  (click)="onDeleteClick(route)" ><bi name="trash"></bi>{{'BUTTONS.DELETE' | translate}}</button>
+        <button type="button" class="btn btn-outline-danger"  (click)="openInsertNewModal(route)" ><bi name="trash"></bi>{{'BUTTONS.EDIT' | translate}}</button>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>

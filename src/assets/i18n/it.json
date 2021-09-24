@@ -1,0 +1,49 @@
+{
+  "LOGIN": {
+    "TITLE": "Accesso",
+    "USERNAME" : "Utente",
+    "PASSWORD" : "Parola d'ordine",
+    "SUBMIT_BUTTON" : "Accesso"
+  },
+  "CITY": {
+    "CITY": "Città",
+    "POSTAL_CODE": "Codice postale",
+    "NAME" : "Nome",
+    "TITLE_INSERT":"Inserisci nuovo città",
+    "TITLE_UPDATE":"Modificare città",
+    "TITLE_DETAILS":"Dettaglo de la città",
+    "CITY_LIST": {
+      "TITLE": "Elenco delle città",
+      "ACTIONS": "Azioni"
+    }
+  },
+  "CLIMBER":{
+    "CLIMBER": "Climber (IT)",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "CLIMBER_LIST": {
+      "TITLE": "Climber list (IT)",
+      "ACTIONS": "Azioni"
+    }
+  },
+
+  "BUTTONS": {
+    "DETAILS": "Dettaglo",
+    "EDIT": "Modificare",
+    "DELETE": "Elimina",
+    "ADD": "Inserisci nuovo",
+    "SAVE": "Salva",
+    "BACK": "Indietro"
+  },
+  "USER_MENU": {
+    "SETTINGS": "Impostazioni",
+    "LOGOUT": "Disconnettersi"
+  },
+  "VALIDATION_MESSAGES": {
+    "REQUIRED": "Questo campo è obbligatorio",
+    "MAX": "Questo valore è maggiore del massimo consentito {{max}}",
+    "MIN": "Questo valore è inferiore al minimo consentito {{min}}"
+  }
+
+
+}

@@ -1,0 +1,33 @@
+<h2>{{'CITY.CITY_LIST.TITLE' | translate }}</h2>
+<button class="btn btn-outline-primary btn-sm m-2" routerLink="../city-form" ><bi name="plus"></bi>{{'BUTTONS.ADD' | translate}}</button>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th sortable="number" (sort)="onSort($event)" scope="col" >{{'CITY.POSTAL_CODE' | translate }}</th>
+    <th sortable="name" (sort)="onSort($event)" scope="col" >{{'CITY.NAME' | translate }}</th>
+    <th scope="col" >{{'CITY.CITY_LIST.ACTIONS' | translate}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let city of cities; let i=index ">
+    <th scope="row">{{ i + (currentPage - 1) * pageSize + 1 }}</th>
+    <td>
+      {{ city.postalCode }}
+    </td>
+    <td>{{ city.name }}</td>
+    <td>
+      <!-- Obratite paznju na to da nema kose crte ispred city-form za to
+        sto je ovo vec child ruta city i ako bi se stavil kosa crta izasao bi iz city rute -->
+      <button class="btn btn-outline-success" [routerLink]="['../city-details', city.postalCode]"  ><bi name="card-text"></bi>{{'BUTTONS.DETAILS' | translate}}</button>
+      <button class="btn btn-outline-success" [routerLink]="['../city-form', city.postalCode]" ><bi name="pencil"></bi>{{'BUTTONS.EDIT' | translate}}</button>
+      <button class="btn btn-outline-danger"  (click)="onDeleteClick(city)" ><bi name="trash"></bi>{{'BUTTONS.DELETE' | translate}}</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="d-flex m-auto justify-content-center">
+  <ngb-pagination [collectionSize]="totalItems" (pageChange)="onPageChange($event)" [(page)]="currentPage" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+</div>
+

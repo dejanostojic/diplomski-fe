@@ -1,0 +1,75 @@
+<!-- <p>registration-fee-modal works!</p>
+<p *ngFor="let registrationFee of registrationFees; let i=index ">
+    {{ registrationFee | objectInfo}}
+</p>
+<div>
+    <h2>choosen one for edit:</h2>
+    <p>{{ registrationFee | objectInfo}}</p>
+</div> -->
+
+<div class="modal-header" #dialogContent>
+    <h4 class="modal-title" id="modal-title">{{isNew ? "Insert" : "Update"}}</h4>
+    <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  
+  
+<form class="" *ngIf="routeForm" [formGroup]="routeForm" (ngSubmit)="onSubmit()" >
+
+  <div class="" >
+    <div class="">
+      <h3>{{ (formTitleKey) | translate}}</h3>
+
+      <div class="from-group">
+        <label for="ord">#</label>
+        <input id="ord" readonly class="form-control" placeholder="#"  type="text" formControlName="ord"/>
+        <div class="alert alert-danger" *ngIf="routeForm.get('ord').touched && routeForm.get('ord').errors">
+          <span *ngIf="routeForm.get('ord').touched && routeForm.get('ord').hasError('required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="name">{{'ROUTE.NAME' | translate }}</label>
+        <input id="name" class="form-control" placeholder="{{'ROUTE.NAME' | translate }}"  type="text" formControlName="name"/>
+        <div class="alert alert-danger" *ngIf="routeForm.get('name').touched && routeForm.get('name').errors">
+          <span *ngIf="hasErrors('name','required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="name">{{'ROUTE.GRADE' | translate }}</label>
+        <input id="name" class="form-control" placeholder="{{'ROUTE.GRADE' | translate }}"  type="text" formControlName="grade"/>
+        <div class="alert alert-danger" *ngIf="routeForm.get('grade').touched && routeForm.get('grade').errors">
+          <span *ngIf="hasErrors('grade','required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+
+     
+
+      <div class="d-flex flex-row-reverse mt-2">
+        <!-- <button type="button" class="btn btn-outline-danger" (click)="onDeleteClick(registrationFee)" [disabled]="!isEnabled('buttonDelete')"><bi name="card-text"></bi>Delete</button> -->
+        <!-- <button type="button" class="btn btn-outline-success" (click)="updateAction()" [disabled]="!isEnabled('buttonEdit')"><bi name="card-text"></bi>Edit</button> -->
+        <!-- <button type="button" class="btn btn-outline-success" (click)="cancelAction()" ><bi name="card-text"></bi>Cancel</button> -->
+        <!-- <button type="button" class="btn btn-outline-success" (click)="enableChanges()" [disabled]="!isEnabled('buttonEnableChanges')" ><bi name="card-text"></bi>EnableChanges</button> -->
+        <!-- <button type="button" class="btn btn-outline-success" (click)="insertAction()"  [disabled]="!isEnabled('buttonSave')"  ><bi name="card-text"></bi>Save</button> -->
+      </div>
+    </div>
+  </div>
+
+
+</form>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" ngbAutofocus (click)="onCancel()">Cancel</button>
+  <button type="button" class="btn btn-danger" (click)="onConfirm()">Ok</button>
+</div>

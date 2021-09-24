@@ -1,0 +1,54 @@
+<h2>{{'COMPETITION.COMPETITION_LIST.TITLE' | translate }} <button class="btn btn-outline-primary btn-sm m-2 float-right" routerLink="../competition-form" ><bi name="plus"></bi>{{'BUTTONS.ADD' | translate}}</button></h2>
+
+<!-- FILTER COMPETITION FORM START-->
+<h3>{{ "FILTER" | translate}}</h3>
+
+<form class="form-inline" *ngIf="filterForm" [formGroup]="filterForm" (ngSubmit)="onFilterApplied()" >
+  <div class="row">
+    <div class="form-group mb-2">
+      <label for="name">{{'COMPETITION.NAME' | translate }}</label>
+      <input type="text"  class="form-control" id="name" placeholder="{{'COMPETITION.NAME' | translate }}" formControlName="name">
+    </div>
+    <div class="form-group mb-2">
+      <label for="registrationOpen">{{'COMPETITION.REGISTRATIONS_OPEN' | translate }}</label>
+      <input type="text"  class="form-control" id="description" placeholder="{{'COMPETITION.REGISTRATIONS_OPEN' | translate }}" formControlName="registrationOpen" >
+    </div>
+
+        <!-- <button type="button" class="btn btn-outline-danger" (click)="onDeleteClick(competition)" [disabled]="!isEnabled('buttonDelete')"><bi name="card-text"></bi>Delete</button> -->
+
+    <button type="submit" class="btn btn-primary mb-2" >Apply filter</button>
+  </div>
+</form>
+<!-- FILTER COMPETITION FORM END -->
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th sortable="name" (sort)="onSort($event)" scope="col" >{{'COMPETITION.NAME' | translate }}</th>
+    <th sortable="description" (sort)="onSort($event)" scope="col" >{{'COMPETITION.DESCRIPTION' | translate }}</th>
+    <th scope="col" >{{'COMPETITION.COMPETITION_LIST.ACTIONS' | translate}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let competition of competitions; let i=index ">
+    <!-- <th scope="row">{{ i + (currentPage - 1) * pageSize + 1 }}</th> -->
+    <td>
+      {{ competition.name }}
+    </td>
+    <td>desc: {{ competition.description }}</td>
+    <td>
+      <!-- Obratite paznju na to da nema kose crte ispred city-form za to
+        sto je ovo vec child ruta city i ako bi se stavil kosa crta izasao bi iz city rute -->
+      <button class="btn btn-outline-success" [routerLink]="['../competition-form', competition.id, 'FORM_VIEW']"  ><bi name="card-text"></bi>{{'BUTTONS.DETAILS' | translate}}</button>
+      <button class="btn btn-outline-success" [routerLink]="['../competition-form/', competition.id, 'FORM_EDIT']" ><bi name="pencil"></bi>{{'BUTTONS.EDIT' | translate}}</button>
+      <button class="btn btn-outline-danger"  (click)="onDeleteClick(competition)" ><bi name="trash"></bi>{{'BUTTONS.DELETE' | translate}}</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="d-flex m-auto justify-content-center">
+  <ngb-pagination [collectionSize]="totalItems" (pageChange)="onPageChange($event)" [(page)]="currentPage" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+</div>
+

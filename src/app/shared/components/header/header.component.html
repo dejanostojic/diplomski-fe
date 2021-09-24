@@ -1,0 +1,150 @@
+<header
+  class="navbar navbar-expand navbar-dark px-4 flex-column flex-md-row bd-navbar"
+>
+  <div class="d-flex justify-content-between app-container">
+    <a
+      routerlink="/"
+      aria-label="NG Bootstrap"
+      class="navbar-brand mr-md-2 mr-0"
+      href="#/"
+    >
+      <img src="/assets/eng-img.png" width="32" />
+    </a>
+    <div class="navbar-nav-scroll">
+      <ul class="navbar-nav flex-row">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/climber/climber-list">{{ 'HEADER.CLIMBER_LIST' | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/competition/competition-list">{{ 'HEADER.COMPETITION_LIST' | translate}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <ul class="navbar-nav ml-md-auto">
+      <!-- <li class="nav-item">
+        <a class="nav-link" (click)="onLogout()">Logout</a>
+      </li> -->
+      <li class="nav-item" ngbDropdown>
+        <a
+          class="nav-link flag-icon"
+          [ngClass]="{
+            'british-icon': selectedLanguage === 'en',
+            'italian-icon': selectedLanguage === 'it'
+          }"
+          tabindex="0"
+          ngbDropdownToggle
+          id="navbarDropdown2"
+          role="button"
+        >
+          {{selectedLanguage}}
+        </a>
+        <div
+          ngbDropdownMenu
+          aria-labelledby="navbarDropdown2"
+          class="dropdown-menu dropdown-menu-right"
+        >
+          <a ngbDropdownItem class="flag-icon british-icon" (click)="onLanguageChange('en')"
+            >en</a>
+          <a ngbDropdownItem class="flag-icon italian-icon" (click)="onLanguageChange('it')"
+            >it</a>
+
+        </div>
+      </li>
+      <div *ngIf="userService.loggedUser" ngbDropdown class="d-inline-block">
+        <button
+          class="btn btn-outline-warning"
+          style="color: white; border-color: white"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          {{ userService.loggedUser | objectInfo: "firstName":"lastName" }}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem><bi name="gear"></bi>{{"USER_MENU.SETTINGS" | translate}}</button>
+          <button ngbDropdownItem (click)="onLogout()"><bi style="color: red;" name="power"></bi>{{"USER_MENU.LOGOUT" | translate}}</button>
+        </div>
+      </div>
+    </ul>
+    <button
+      type="button"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      class="navbar-toggler navbar-toggler-right"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</header>
+
+<!-- <a class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3" href="/docs/4.5/getting-started/download/">Download</a> -->
+
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="app-container">
+    <div class="d-flex justify-content-between">
+      <a class="navbar-brand" routerLink="/">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto" *ngIf="userDetails">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              {{ userDetails.firstname + " " + userDetails.lastname }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav> -->
+
+<!-- <ul ngbNav #nav="ngbNav" class="nav-tabs">
+  <li ngbNavItem>
+    <a ngbNavLink routerLink="/city">First</a>
+  </li>
+  <li ngbNavItem>
+    <a ngbNavLink (click)="logut()">Logout</a>
+  </li>
+  <li *ngIf="userDetails">
+    {{ userDetails.firstname + " " + userDetails.lastname }}
+  </li>
+  <li ngbDropdown class="nav-item">
+    <a href (click)="(false)" class="nav-link" ngbDropdownToggle>Dropdown</a>
+    <div ngbDropdownMenu>
+      <button
+        ngbDropdownItem
+        (click)="onLanguageChange('en')"
+        class="flag-icon british-icon"
+      >
+        en
+      </button>
+      <button
+        ngbDropdownItem
+        (click)="onLanguageChange('it')"
+        class="flag-icon italian-icon"
+      >
+        it
+      </button>
+    </div>
+  </li>
+</ul>
+<div [ngbNavOutlet]="nav"></div> -->

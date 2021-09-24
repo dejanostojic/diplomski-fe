@@ -1,0 +1,160 @@
+
+<a routerLink="/competition/competition-list" style="font-size: x-large;" ><bi name="arrow-left-circle" ></bi>{{ 'BUTTONS.BACK' | translate}}</a>
+<!-- Obratiti paznju na *ngIf u form tagu. Kada se radi edit ova forma ce se
+  kreirati tek kad stignu podaci. Zato je ovo neophodno -->
+  <h3>{{ (formTitleKey) | translate}}</h3>
+
+<form *ngIf="competitionForm" [formGroup]="competitionForm" (ngSubmit)="onSubmit()" >
+
+    <input id="id" class="form-control" type="text" formControlName="id" hidden="true"/>
+    <div class="from-group">
+      <label for="name">{{'COMPETITION.NAME' | translate }}</label>
+      <input id="name" class="form-control" placeholder="{{'COMPETITION.NAME' | translate }}"  type="text" formControlName="name"/>
+      <div class="alert alert-danger" *ngIf="competitionForm.get('name').touched && competitionForm.get('name').errors">
+        <span *ngIf="hasErrors('name','required')" >
+          <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+        </span>
+        
+      </div>
+    </div>
+    <div class="from-group">
+      <label for="description">{{'COMPETITION.DESCRIPTION' | translate }}</label>
+      <input id="description" class="form-control" placeholder="{{'COMPETITION.DESCRIPTION' | translate }}"  type="text" formControlName="description"/>
+      <div class="alert alert-danger" *ngIf="competitionForm.get('description').touched && competitionForm.get('description').errors">
+        <span *ngIf="hasErrors('description','required')" >
+          <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+        </span>
+      </div>
+    </div>
+<!-- 
+    <div class="form-group">
+      <label for="password-input">{{'COMPETITION.REGISTRATIONS_OPEN' | translate }}</label>
+      <div class="input-group">
+        <input id="registrationOpen" ngbDatepicker  #registrationOpen="ngbDatepicker" class="form-control" placeholder="{{'COMPETITION.REGISTRATIONS_OPEN' | translate }}"  type="text" formControlName="registrationOpen"/>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="registrationOpen.toggle()" type="button">Choose date</button>
+        </div>
+      </div>
+      <div class="alert alert-danger" *ngIf="competitionForm.get('registrationOpen').touched && competitionForm.get('registrationOpen').errors">
+        <span *ngIf="hasErrors('registrationOpen','required')" >
+          <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+        </span>
+      </div>
+      <div>
+        <ngb-timepicker formControlName="registrationOpenTime" > </ngb-timepicker>
+        <div class="alert alert-danger" *ngIf="competitionForm.get('registrationOpenTime').touched && competitionForm.get('registrationOpenTime').errors">
+          <span *ngIf="hasErrors('registrationOpenTime','required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password-input">{{'COMPETITION.REGISTRATIONS_CLOSE' | translate }}</label>
+      <div class="input-group">
+        <input id="registrationClose" ngbDatepicker  #registrationClose="ngbDatepicker" class="form-control" placeholder="{{'COMPETITION.REGISTRATIONS_CLOSE' | translate }}"  type="text" formControlName="registrationClose"/>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="registrationClose.toggle()" type="button">Choose date</button>
+        </div>
+      </div>
+      <div class="alert alert-danger" *ngIf="competitionForm.get('registrationClose').touched && competitionForm.get('registrationClose').errors">
+        <span *ngIf="hasErrors('registrationClose','required')" >
+          <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+        </span>
+      </div>
+      <div>
+        <ngb-timepicker formControlName="registrationCloseTime" > </ngb-timepicker>
+        <div class="alert alert-danger" *ngIf="competitionForm.get('registrationCloseTime').touched && competitionForm.get('registrationCloseTime').errors">
+          <span *ngIf="hasErrors('registrationCloseTime','required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+
+      </div>
+    </div> -->
+    <!-- TEST IN ROW !!! -->
+    <div class="form-row align-items-center">
+      <div class="col-sm-6 my-1">
+        <label for="password-input">{{'COMPETITION.REGISTRATIONS_OPEN' | translate }}</label>
+        <div class="input-group">
+          <input id="registrationOpenDate" ngbDatepicker  #registrationOpenDate="ngbDatepicker" class="form-control" placeholder="{{'COMPETITION.REGISTRATIONS_OPEN' | translate }}"  type="text" formControlName="registrationOpenDate"/>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="registrationOpenDate.toggle()" type="button">Choose date</button>
+          </div>
+        
+        <!-- <ngb-datepicker #ngbDatepicker  formControlName="registrationOpenDate"></ngb-datepicker> -->
+
+        </div>  
+        <div class="alert alert-danger" *ngIf="competitionForm.get('registrationOpenDate').touched && competitionForm.get('registrationOpenDate').errors">
+          <span *ngIf="hasErrors('registrationOpenDate','required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>  
+        <ngb-timepicker formControlName="registrationOpenTime" > </ngb-timepicker>
+        <div class="alert alert-danger" *ngIf="competitionForm.get('registrationOpenTime').touched && competitionForm.get('registrationOpenTime').errors">
+          <span *ngIf="hasErrors('registrationOpenTime','required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>  
+      </div>
+
+      <div class="col-sm-6 my-1">
+        <label for="password-input">{{'COMPETITION.REGISTRATIONS_CLOSE' | translate }}</label>
+        <div class="input-group">
+          <input id="registrationCloseDate" ngbDatepicker  #registrationCloseDate="ngbDatepicker" class="form-control" placeholder="{{'COMPETITION.REGISTRATIONS_CLOSE' | translate }}"  type="text" formControlName="registrationCloseDate"/>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="registrationCloseDate.toggle()" type="button">Choose date</button>
+          </div>
+        </div>  
+        <ngb-timepicker formControlName="registrationCloseTime" > </ngb-timepicker>
+        <div class="alert alert-danger" *ngIf="competitionForm.get('registrationCloseTime').touched && competitionForm.get('registrationCloseTime').errors">
+          <span *ngIf="hasErrors('registrationCloseTime','required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>    
+      </div>
+      
+    </div>
+    <!-- TEST IN ROW end !!! -->
+
+    <hr/>
+
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" [destroyOnHide]="false" class="nav-tabs">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>Registration fees</a>
+        <ng-template ngbNavContent>
+          <app-registration-fee #regFeeChildComp [registrationFees]="competition.registrationFees"></app-registration-fee>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink>Routes</a>
+        <ng-template ngbNavContent>
+          <app-route #compRoute  [routes]="competition.routes"></app-route>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="3">
+        <a ngbNavLink>Registrations</a>
+        <ng-template ngbNavContent let-active>
+          <app-registration [registrations]="competition.registrations" [registrationFees]="competition.registrationFees"></app-registration>
+        </ng-template>
+      </li>
+    </ul>
+    
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    
+    <pre>Active: {{ active }}</pre>
+    
+
+    
+    <div class="d-flex flex-row-reverse mt-2">
+      <button type="button" class="btn btn-outline-danger" (click)="onDeleteClick(competition)" [disabled]="!isEnabled('buttonDelete')"><bi name="card-text"></bi>Delete</button>
+      <button type="button" class="btn btn-outline-success" (click)="updateAction()" [disabled]="!isEnabled('buttonEdit')"><bi name="card-text"></bi>Edit</button>
+      <button type="button" class="btn btn-outline-success" (click)="cancelAction()" ><bi name="card-text"></bi>Cancel</button>
+      <button type="button" class="btn btn-outline-success" (click)="enableChanges()" [disabled]="!isEnabled('buttonEnableChanges')" ><bi name="card-text"></bi>EnableChanges</button>
+      <button type="button" class="btn btn-outline-success" (click)="insertAction()"  [disabled]="!isEnabled('buttonSave')"  ><bi name="card-text"></bi>Save</button>
+    </div>
+
+
+</form>

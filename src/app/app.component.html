@@ -1,0 +1,10 @@
+<app-header *ngIf="userService.loggedUser" ></app-header>
+
+<app-global-toast></app-global-toast>
+<!-- <app-confirm-dialog ></app-confirm-dialog> -->
+
+<div class="app-container">
+  <router-outlet></router-outlet>
+
+</div>
+

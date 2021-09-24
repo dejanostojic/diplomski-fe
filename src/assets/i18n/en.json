@@ -1,0 +1,88 @@
+{
+  "LOGIN": {
+    "TITLE": "Login",
+    "USERNAME" : "Username",
+    "PASSWORD" : "Password",
+    "SUBMIT_BUTTON" : "Login"
+  },
+  "CITY": {
+    "CITY": "City",
+    "POSTAL_CODE": "Postal code",
+    "NAME" : "Nome",
+    "TITLE_INSERT":"Insert new city",
+    "TITLE_UPDATE":"Update city",
+    "TITLE_DETAILS":"City details",
+    "CITY_LIST": {
+      "TITLE": "City list",
+      "ACTIONS": "Actions"
+    }
+  },
+
+  "CLIMBER":{
+    "TITLE_INSERT": "Insert new climber",
+    "TITLE_UPDATE": "Update climber",
+    "TITLE_VIEW": "Climber details",
+    "CLIMBER": "Climber",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "YEAR_OF_BIRTH": "Year of birth",
+    "CLIMBER_LIST": {
+      "TITLE": "Climber list",
+      "ACTIONS": "Actions"
+    }
+  },
+  "COMPETITION":{
+    "TITLE_INSERT": "Insert new competition",
+    "TITLE_UPDATE": "Update competition",
+    "TITLE_VIEW": "Competition details",
+    "CLIMBER": "competition",
+    "NAME": "Name",
+    "DESCRIPTION": "Description",
+    "COMPETITION_LIST": {
+      "TITLE": "Competition list",
+      "ACTIONS": "Actions"
+    },
+    "REGISTRATIONS_OPEN": "Registration open",
+    "REGISTRATIONS_CLOSE": "Registration close"
+  },
+  "REGISTRATION_FEE": {
+    "NAME": "Name",
+    "AMOUNT": "Amount",
+    "START_DATE": "Start date",
+    "END_DATE": "End date",
+    "ACTIONS": "Actions"
+  },
+  "REGISTRATION": {
+    "CLIMBER": "Climber",
+    "CHOOSE_CLIMBER": "Choose",
+    "START_NUMBER": "Start number",
+    "PAID": "Paid",
+    "ACTIONS": "Actions",
+    "CREATED_DATE": "Created date",
+    "PAID_DATE": "Paid date",
+    "REGISTRATION_FEE": "Registration fee"
+  },
+  "BUTTONS": {
+    "DETAILS": "Details",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "ADD": "Add new",
+    "SAVE": "Save",
+    "BACK": "Back"
+  },
+  "USER_MENU": {
+    "SETTINGS": "Settings",
+    "LOGOUT": "Logout"
+  },
+  "VALIDATION_MESSAGES": {
+    "REQUIRED": "This field is required",
+    "MAX": "This value is bigger then allowable maximum {{max}}",
+    "MIN": "This value is less then allowable minimum {{min}}",
+    "MUST_BE_NUMBER": "This field must be number"
+  },
+  "HEADER": {
+    "CLIMBER_LIST": "Climbers",
+    "COMPETITION_LIST": "Competitions"
+  }
+  
+}

@@ -1,0 +1,34 @@
+<h3>registration Fees</h3>
+<button class="btn btn-outline-primary btn-sm m-2 float-right" type="button" (click)="openInsertNewModal()" ><bi name="plus"></bi>{{'BUTTONS.ADD' | translate}}</button>
+<table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th  scope="col" >{{'REGISTRATION_FEE.NAME' | translate }}</th>
+      <th  scope="col" >{{'REGISTRATION_FEE.AMOUNT' | translate }}</th>
+      <th scope="col" >{{'REGISTRATION_FEE.START_DATE' | translate }}</th>
+      <th scope="col" >{{'REGISTRATION_FEE.END_DATE' | translate }}</th>
+      <th scope="col" >{{'REGISTRATION_FEE.ACTIONS' | translate}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let regFee of registrationFees; let i=index ">
+      <td>
+        {{ regFee.ord }}
+      </td>
+      <td>{{ regFee.name }}</td>
+      <td>{{ regFee.amount }}</td>
+      <td>{{ regFee.startDate | date }}</td>
+      <td>{{ regFee.endDate | date }}</td>
+      <td>
+        <!-- Obratite paznju na to da nema kose crte ispred city-form za to
+          sto je ovo vec child ruta city i ako bi se stavil kosa crta izasao bi iz city rute -->
+        <!-- <button class="btn btn-outline-success" [routerLink]="['../competition-form', competition.id, 'FORM_VIEW']"  ><bi name="card-text"></bi>{{'BUTTONS.DETAILS' | translate}}</button> -->
+        <!-- <button class="btn btn-outline-success" [routerLink]="['../competition-form/', competition.id, 'FORM_EDIT']" ><bi name="pencil"></bi>{{'BUTTONS.EDIT' | translate}}</button> -->
+        <button type="button" class="btn btn-outline-danger"  (click)="onDeleteClick(regFee)" ><bi name="trash"></bi>{{'BUTTONS.DELETE' | translate}}</button>
+        <button type="button" class="btn btn-outline-danger"  (click)="openInsertNewModal(regFee)" ><bi name="trash"></bi>{{'BUTTONS.EDIT' | translate}}</button>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
