@@ -24,7 +24,9 @@
 </form>
 
 <!-- FILTER CLIMBER FORM END -->
-<table class="table table-striped">
+
+
+<table *ngIf="climbers && climbers.length > 0"  class="table table-striped">
   <thead>
   <tr>
     <th scope="col">#</th>
@@ -53,7 +55,10 @@
   </tbody>
 </table>
 
-<div class="d-flex m-auto justify-content-center">
+<div *ngIf="climbers && climbers.length > 0"  class="d-flex m-auto justify-content-center">
   <ngb-pagination [collectionSize]="totalItems" (pageChange)="onPageChange($event)" [(page)]="currentPage" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
 </div>
 
+<div *ngIf="climbers === null || climbers.length === 0" >
+  <p class="error danger">System can not find climbers for search criteria</p>
+</div>

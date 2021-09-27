@@ -1,0 +1,76 @@
+
+<a routerLink="/admin/admin-list" style="font-size: x-large;" ><bi name="arrow-left-circle" ></bi>{{ 'BUTTONS.BACK' | translate}}</a>
+<!-- Obratiti paznju na *ngIf u form tagu. Kada se radi edit ova forma ce se
+  kreirati tek kad stignu podaci. Zato je ovo neophodno -->
+
+  <h2 *ngIf="error">{{error}}</h2>
+<form *ngIf="adminForm" [formGroup]="adminForm" (ngSubmit)="onSubmit()" >
+
+    <input id="id" class="form-control" type="text" formControlName="id" hidden="true"/>
+
+  <div class="row" >
+    <div class="col-md-8 col-lg-6">
+      <h3>{{ (formTitleKey) | translate}}</h3>
+
+      <div class="from-group">
+        <label for="firstName">{{'ADMIN.FIRST_NAME' | translate }}</label>
+        <input id="firstName" class="form-control" placeholder="First name"  type="text" formControlName="firstName"/>
+        <div class="alert alert-danger" *ngIf="adminForm.get('firstName').touched && adminForm.get('firstName').errors">
+          <span *ngIf="adminForm.get('firstName').touched && adminForm.get('firstName').hasError('required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+          <span *ngIf="adminForm.get('firstName').touched && adminForm.get('firstName').hasError('min')" >
+            <!-- NAPOMENA: Ispod je zakomentarisan primer kako bi se radilo da se ne koristi internacionalizacija -->
+            <!-- <small>This value is less then allowable minimum {{adminForm.get('firstName').errors.min.min }}</small> -->
+            <small>{{'VALIDATION_MESSAGES.MIN' | translate: {min:adminForm.get('firstName').errors.min.min}  }}</small>
+          </span>
+          <!-- NAPOMENA: Mozete da napravite utility funkciju koja skracuje pisanje koda  -->
+          <span *ngIf="hasErrors('firstName', 'max')" >
+            <small>{{'VALIDATION_MESSAGES.MAX' | translate: {max:adminForm.get('firstName').errors.max.max}  }}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="lastName">{{'ADMIN.LAST_NAME' | translate }}</label>
+        <input id="lastName" class="form-control" placeholder="Name"  type="text" formControlName="lastName"/>
+        <div class="alert alert-danger" *ngIf="adminForm.get('lastName').touched && adminForm.get('lastName').errors">
+          <span *ngIf="hasErrors('lastName','required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="username">{{'ADMIN.USERNAME' | translate }}</label>
+        <input id="username" class="form-control" placeholder="Name"  type="text" formControlName="username"/>
+        <div class="alert alert-danger" *ngIf="adminForm.get('username').touched && adminForm.get('username').errors">
+          <span *ngIf="hasErrors('username','required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+
+      <div class="from-group">
+        <label for="password">{{'ADMIN.PASSWORD' | translate }}</label>
+        <input id="password" class="form-control" placeholder="{{'ADMIN.PASSWORD' | translate }}"  type="password" formControlName="password"/>
+        <div class="alert alert-danger" *ngIf="adminForm.get('password').touched && adminForm.get('password').errors">
+          <span *ngIf="hasErrors('password','required')" >
+            <small>{{'VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row-reverse mt-2">
+        <button type="button" class="btn btn-outline-danger" (click)="onDeleteClick(admin)" [disabled]="!isEnabled('buttonDelete')"><bi name="card-text"></bi>Delete</button>
+        <button type="button" class="btn btn-outline-success" (click)="updateAction()" [disabled]="!isEnabled('buttonEdit')"><bi name="card-text"></bi>Edit</button>
+        <button type="button" class="btn btn-outline-success" (click)="cancelAction()" ><bi name="card-text"></bi>Cancel</button>
+        <button type="button" class="btn btn-outline-success" (click)="enableChanges()" [disabled]="!isEnabled('buttonEnableChanges')" ><bi name="card-text"></bi>EnableChanges</button>
+        <button type="button" class="btn btn-outline-success" (click)="insertAction()"  [disabled]="!isEnabled('buttonSave')"  ><bi name="card-text"></bi>Save</button>
+      </div>
+    </div>
+  </div>
+
+
+</form>

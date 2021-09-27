@@ -1,0 +1,65 @@
+<h2>{{'ADMIN.ADMIN_LIST.TITLE' | translate }} <button class="btn btn-outline-primary btn-sm m-2 float-right" routerLink="../admin-form" ><bi name="plus"></bi>{{'BUTTONS.ADD' | translate}}</button></h2>
+
+<!-- FILTER ADMIN FORM START-->
+<h3>{{ "FILTER" | translate}}</h3>
+
+<form class="form-inline" *ngIf="filterForm" [formGroup]="filterForm" (ngSubmit)="onFilterApplied()" >
+  <div class="row">
+    <div class="form-group mb-2">
+      <label for="firstName">{{'ADMIN.FIRST_NAME' | translate }}</label>
+      <input type="text"  class="form-control" id="firstName" placeholder="{{'ADMIN.FIRST_NAME' | translate }}" formControlName="firstName">
+    </div>
+    <div class="form-group mb-2">
+      <label for="lastName">{{'ADMIN.LAST_NAME' | translate }}</label>
+      <input type="text"  class="form-control" id="lastName" placeholder="{{'ADMIN.LAST_NAME' | translate }}" formControlName="lastName" >
+    </div>
+    <div class="form-group mb-2">
+      <label for="username">{{'ADMIN.USERNAME' | translate }}</label>
+      <input type="text"  class="form-control" id="username" placeholder="{{'ADMIN.USERNAME' | translate }}" formControlName="username" >
+    </div>
+
+        <!-- <button type="button" class="btn btn-outline-danger" (click)="onDeleteClick(admin)" [disabled]="!isEnabled('buttonDelete')"><bi name="card-text"></bi>Delete</button> -->
+
+    <button type="submit" class="btn btn-primary mb-2" >Apply filter</button>
+  </div>
+</form>
+
+<!-- FILTER ADMIN FORM END -->
+
+
+<table *ngIf="admins && admins.length > 0"  class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th sortable="firstname" (sort)="onSort($event)" scope="col" >{{'ADMIN.FIRST_NAME' | translate }}</th>
+    <th sortable="lastname" (sort)="onSort($event)" scope="col" >{{'ADMIN.LAST_NAME' | translate }}</th>
+    <th sortable="username" (sort)="onSort($event)" scope="col" >{{'ADMIN.USERNAME' | translate }}</th>
+    <th scope="col" >{{'ADMIN.ADMIN_LIST.ACTIONS' | translate}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let admin of admins; let i=index ">
+    <th scope="row">{{ i + (currentPage - 1) * pageSize + 1 }}</th>
+    <td>
+      {{ admin.firstName }}
+    </td>
+    <td>{{ admin.lastName }}</td>
+    <td>{{ admin.username }}</td>
+    <td>
+      <!-- Obratite paznju na to da nema kose crte ispred city-form za to
+        sto je ovo vec child ruta city i ako bi se stavil kosa crta izasao bi iz city rute -->
+      <button class="btn btn-outline-success" [routerLink]="['../admin-form', admin.id, 'FORM_VIEW']"  ><bi name="card-text"></bi>{{'BUTTONS.DETAILS' | translate}}</button>
+      <button class="btn btn-outline-success" [routerLink]="['../admin-form/', admin.id, 'FORM_EDIT']" ><bi name="pencil"></bi>{{'BUTTONS.EDIT' | translate}}</button>
+      <button class="btn btn-outline-danger"  (click)="onDeleteClick(admin)" ><bi name="trash"></bi>{{'BUTTONS.DELETE' | translate}}</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="admins && admins.length > 0"  class="d-flex m-auto justify-content-center">
+  <ngb-pagination [collectionSize]="totalItems" (pageChange)="onPageChange($event)" [(page)]="currentPage" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+</div>
+
+<div *ngIf="admins === null || admins.length === 0" >
+  <p class="error danger">System can not find admins for search criteria</p>
+</div>

@@ -10,29 +10,30 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { CompetitionSearchCriteria, Competition } from 'src/app/core';
-import { CompetitionService } from 'src/app/core/service/competition.service';
+import { AdminSearchCriteria } from 'src/app/core';
+import { Admin } from 'src/app/core/models/admin.model';
+import { AdminService } from 'src/app/core/service/admin.service';
 import { ToastService } from 'src/app/core/service/toast.service';
 import { SortableHeaderDirective, SortEvent } from 'src/app/shared';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
-  selector: 'app-competition-list',
-  templateUrl: './competition-list.component.html',
-  styleUrls: ['./competition-list.component.css']
+  selector: 'app-admin-list',
+  templateUrl: './admin-list.component.html',
+  styleUrls: ['./admin-list.component.css']
 })
-export class CompetitionListComponent implements OnInit, OnDestroy {
-  competitions: Competition[];
+export class AdminListComponent implements OnInit, OnDestroy {
+  admins: Admin[];
   currentPage = 1;
   totalItems = 10;
-  pageSize = 8;
+  pageSize = 10;
   filterForm: FormGroup;
-  searchCriteria = new CompetitionSearchCriteria();
+  searchCriteria = new AdminSearchCriteria();
 
   destroy$: Subject<boolean> = new Subject();
 
   constructor(
-    private competitionService: CompetitionService,
+    private adminService: AdminService,
     private modalService: NgbModal,
     private toastService: ToastService,
     private fb: FormBuilder,
@@ -45,7 +46,7 @@ export class CompetitionListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.buildFilterForm();
-    this.loadCompetitions();
+    this.loadAdmins();
   }
 
 
@@ -57,29 +58,34 @@ export class CompetitionListComponent implements OnInit, OnDestroy {
   buildFilterForm() {
     let paramMap = this.route.snapshot.queryParams;
     console.log("paramMap: " + JSON.stringify(paramMap));
-    this.searchCriteria.name = paramMap.name;
-    
-      if(paramMap.registrationOpen != undefined && paramMap.registrationOpen !== "" && new Boolean(paramMap.registrationOpen)){
-        this.searchCriteria.registrationOpen = new Boolean(paramMap.registrationOpen);
-      }
-      else{
-        this.searchCriteria.registrationOpen = null;
-        
-    }
-    
+    this.searchCriteria.firstName = paramMap.firstName;
+    this.searchCriteria.lastName = paramMap.lastName;
+    this.searchCriteria.username = paramMap.username;
+ 
 
     this.filterForm = this.fb.group({
-      name: [this.searchCriteria.name],
-      registrationOpen: [this.searchCriteria.registrationOpen]
+      firstName: [this.searchCriteria.firstName],
+      lastName: [this.searchCriteria.lastName],
+      username: [this.searchCriteria.username]
     });
 
   }
 
 
+  // todo move this in separate file
+  isNumericValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (control.value === null || control.value === undefined){
+        return null;
+      }
+      const numeric = new RegExp("^[0-9]*$").test(control.value);
+      return !numeric ? {numeric: {value: control.value, message: "This field must be number!"}} : null;
+    };
+  }
 
-  loadCompetitions(){
+  loadAdmins(){
     console.log('Pre poziva');
-    /*this.competitionService
+    /*this.adminService
       .getByPage(this.currentPage - 1, this.pageSize)
       // .pipe(takeUntil(this.destroy$))
       .subscribe((response) => {
@@ -91,11 +97,10 @@ export class CompetitionListComponent implements OnInit, OnDestroy {
       });
       */
      console.log(JSON.stringify(this.searchCriteria))
-      let response =  this.competitionService
+      let response =  this.adminService
       .getByPage(this.currentPage - 1, this.pageSize, this.searchCriteria)
       .subscribe((response) => {
-        console.log("RESPONSE FROM SERVICE: " + JSON.stringify(response))
-        this.competitions = response.content;
+        this.admins = response.content;
         this.totalItems = response.totalElements;
         // this.pageSize = response.size;
         this.currentPage = response.number + 1;
@@ -120,7 +125,7 @@ export class CompetitionListComponent implements OnInit, OnDestroy {
 
   onPageChange(page: number) {
     this.currentPage = page;
-    this.loadCompetitions();
+    this.loadAdmins();
   }
 
   onFilterApplied(){
@@ -132,40 +137,41 @@ export class CompetitionListComponent implements OnInit, OnDestroy {
       this.searchCriteria = this.filterForm.value;
     
       let filter = "?filter=true" 
-      filter += this.searchCriteria.name  ? `&firstName=${this.searchCriteria?.name}` : ""; 
-      filter += this.searchCriteria.registrationOpen ? `&lastName=${this.searchCriteria?.registrationOpen}` : "";
+      filter += this.searchCriteria.firstName  ? `&firstName=${this.searchCriteria?.firstName}` : ""; 
+      filter += this.searchCriteria.lastName ? `&lastName=${this.searchCriteria?.lastName}` : "";
+      filter += this.searchCriteria.username ? `&username=${this.searchCriteria?.username}` : "";
       
       this.router.navigate([], {relativeTo: this.route, queryParams: this.searchCriteria})
       
-      this.loadCompetitions();
+      this.loadAdmins();
     }else {
       console.log("not valid form")
     }
     
   }
 
-  onDeleteClick(competition: Competition) {
+  onDeleteClick(admin: Admin) {
     const modalRef = this.modalService.open(ConfirmDialogComponent);
-    modalRef.componentInstance.message = `Are you sure you want to delete competition <strong>${competition.name}</strong> ?`;
-    modalRef.componentInstance.headerText = 'Deleting competition';
+    modalRef.componentInstance.message = `Are you sure you want to delete admin <strong>${admin.firstName} ${admin.lastName}</strong> ?`;
+    modalRef.componentInstance.headerText = 'Deleting admin';
     modalRef.result.then(
       // NAPOMENA: Ovde ce samo ako je zadovoljen prvi uslov izvrsiti ovo drugo.
-      (result) => result === 'Ok' && this.deleteSelectedCompetition(competition)
+      (result) => result === 'Ok' && this.deleteSelectedAdmin(admin)
     );
   }
 
-  deleteSelectedCompetition(competition: Competition) {
-    this.competitionService.deleteCompetition(competition).subscribe((response) => {
+  deleteSelectedAdmin(admin: Admin) {
+    this.adminService.deleteAdmin(admin).subscribe((response) => {
       this.toastService.show(
-        'Competition deleted ',
-        { header: 'Deleting competition', classname: 'bg-success text-light' }
+        'Admin deleted ',
+        { header: 'Deleting admin', classname: 'bg-success text-light' }
       );
-      this.loadCompetitions();
+      this.loadAdmins();
     },
     err => {
       this.toastService.show(
-        'Competition not deleted',
-        { header: 'Error deleting competition', classname: 'bg-danger text-light' }
+        'Admin not deleted',
+        { header: 'Error deleting admin', classname: 'bg-danger text-light' }
       );
     });
   }

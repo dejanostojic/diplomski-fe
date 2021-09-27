@@ -21,10 +21,9 @@
 </form>
 <!-- FILTER COMPETITION FORM END -->
 
-<table class="table table-striped">
+<table  *ngIf="competitions && competitions.length > 0" class="table table-striped">
   <thead>
   <tr>
-    <th scope="col">#</th>
     <th sortable="name" (sort)="onSort($event)" scope="col" >{{'COMPETITION.NAME' | translate }}</th>
     <th sortable="description" (sort)="onSort($event)" scope="col" >{{'COMPETITION.DESCRIPTION' | translate }}</th>
     <th scope="col" >{{'COMPETITION.COMPETITION_LIST.ACTIONS' | translate}}</th>
@@ -42,13 +41,17 @@
         sto je ovo vec child ruta city i ako bi se stavil kosa crta izasao bi iz city rute -->
       <button class="btn btn-outline-success" [routerLink]="['../competition-form', competition.id, 'FORM_VIEW']"  ><bi name="card-text"></bi>{{'BUTTONS.DETAILS' | translate}}</button>
       <button class="btn btn-outline-success" [routerLink]="['../competition-form/', competition.id, 'FORM_EDIT']" ><bi name="pencil"></bi>{{'BUTTONS.EDIT' | translate}}</button>
-      <button class="btn btn-outline-danger"  (click)="onDeleteClick(competition)" ><bi name="trash"></bi>{{'BUTTONS.DELETE' | translate}}</button>
+      <!--<button class="btn btn-outline-danger"  (click)="onDeleteClick(competition)" ><bi name="trash"></bi>{{'BUTTONS.DELETE' | translate}}</button>-->
     </td>
   </tr>
   </tbody>
 </table>
 
-<div class="d-flex m-auto justify-content-center">
+<div   *ngIf="competitions && competitions.length > 0" class="d-flex m-auto justify-content-center">
   <ngb-pagination [collectionSize]="totalItems" (pageChange)="onPageChange($event)" [(page)]="currentPage" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
 </div>
 
+
+<div *ngIf="competitions && competitions.length === 0" >
+  <p class="error danger">System can not find competitions for search criteria</p>
+</div>

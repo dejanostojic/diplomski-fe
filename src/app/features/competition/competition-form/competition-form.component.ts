@@ -133,7 +133,7 @@ export class CompetitionFormComponent implements OnInit, AfterViewInit{
 
       this.competition = competition
       this.buildForm(this.formMode === FormMode.FORM_VIEW ,this.competition);
-    });
+    }, error => this.error = "System can not load Competition!");
   }
 // yyyy-MM-dd'T'HH:mm:ss.SS'Z
   // toPickerDate(d: Date ){

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChooseClimberComponent } from './choose-climber.component';
+import { AdminListComponent } from './admin-list.component';
 
-describe('ClimberListComponent', () => {
-  let component: ChooseClimberComponent;
-  let fixture: ComponentFixture<ChooseClimberComponent>;
+describe('AdminListComponent', () => {
+  let component: AdminListComponent;
+  let fixture: ComponentFixture<AdminListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChooseClimberComponent ]
+      declarations: [ AdminListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChooseClimberComponent);
+    fixture = TestBed.createComponent(AdminListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

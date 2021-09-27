@@ -20,6 +20,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'admin',
+    loadChildren: () =>
+      import('./features/admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'competition',
     loadChildren: () =>
       import('./features/competition/competition.module').then((m) => m.CompetitionModule),

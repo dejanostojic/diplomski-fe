@@ -31,6 +31,20 @@
       "ACTIONS": "Actions"
     }
   },
+    "ADMIN":{
+    "TITLE_INSERT": "Insert new admin",
+    "TITLE_UPDATE": "Update admin",
+    "TITLE_VIEW": "Admin details",
+    "CLIMBER": "Admin",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "PASSWORD": "Password",
+    "USERNAME": "Username",
+    "ADMIN_LIST": {
+      "TITLE": "Admin list",
+      "ACTIONS": "Actions"
+    }
+  },
   "COMPETITION":{
     "TITLE_INSERT": "Insert new competition",
     "TITLE_UPDATE": "Update competition",
@@ -62,6 +76,10 @@
     "PAID_DATE": "Paid date",
     "REGISTRATION_FEE": "Registration fee"
   },
+  "ROUTE":{
+    "NAME" : "Name",
+    "GRADE" : "Grade"
+  },
   "BUTTONS": {
     "DETAILS": "Details",
     "EDIT": "Edit",
@@ -81,6 +99,7 @@
     "MUST_BE_NUMBER": "This field must be number"
   },
   "HEADER": {
+    "ADMIN_LIST": "Admin",
     "CLIMBER_LIST": "Climbers",
     "COMPETITION_LIST": "Competitions"
   }

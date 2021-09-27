@@ -3,6 +3,7 @@
 <!-- Obratiti paznju na *ngIf u form tagu. Kada se radi edit ova forma ce se
   kreirati tek kad stignu podaci. Zato je ovo neophodno -->
   <h3>{{ (formTitleKey) | translate}}</h3>
+  <h2 *ngIf="error">{{error}}</h2>
 
 <form *ngIf="competitionForm" [formGroup]="competitionForm" (ngSubmit)="onSubmit()" >
 
@@ -143,9 +144,7 @@
     </ul>
     
     <div [ngbNavOutlet]="nav" class="mt-2"></div>
-    
-    <pre>Active: {{ active }}</pre>
-    
+        
 
     
     <div class="d-flex flex-row-reverse mt-2">

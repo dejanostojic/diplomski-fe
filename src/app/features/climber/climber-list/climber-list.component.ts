@@ -26,7 +26,7 @@ export class ClimberListComponent implements OnInit, OnDestroy {
   climbers: Climber[];
   currentPage = 1;
   totalItems = 10;
-  pageSize = 2;
+  pageSize = 10;
   filterForm: FormGroup;
   searchCriteria = new ClimberSearchCriteria();
 
@@ -109,7 +109,7 @@ export class ClimberListComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.climbers = response.content;
         this.totalItems = response.totalElements;
-        this.pageSize = response.size;
+        // this.pageSize = response.size;
         this.currentPage = response.number + 1;
         console.log('Nakon stizanja podataka ')
       });

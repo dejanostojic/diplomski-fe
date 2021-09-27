@@ -2,6 +2,8 @@
 <a routerLink="/climber/climber-list" style="font-size: x-large;" ><bi name="arrow-left-circle" ></bi>{{ 'BUTTONS.BACK' | translate}}</a>
 <!-- Obratiti paznju na *ngIf u form tagu. Kada se radi edit ova forma ce se
   kreirati tek kad stignu podaci. Zato je ovo neophodno -->
+
+  <h2 *ngIf="error">{{error}}</h2>
 <form *ngIf="climberForm" [formGroup]="climberForm" (ngSubmit)="onSubmit()" >
 
     <input id="id" class="form-control" type="text" formControlName="id" hidden="true"/>
